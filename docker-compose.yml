@@ -1,0 +1,34 @@
+version: "3"
+services:
+  todo-app-ui:
+    build: todo-app-ui/
+    container_name: todoappui
+    ports:
+      - 9050:80
+    volumes:
+      - uidb:/app
+    links:
+      - todo-app
+
+  todo-app:
+    build: todo-app/
+    container_name: todoapp
+    image: todoapp:latest
+    ports:
+      - 9100:5000
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    ports:
+      - "27021:27017"
+    volumes:
+      - logindb:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=password
+
+volumes:
+  uidb:
+  logindb:
