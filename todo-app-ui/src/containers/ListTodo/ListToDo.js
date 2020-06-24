@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, forwardRef } from "react";
 
 import MaterialTable from "material-table";
 import { Container } from "@material-ui/core";
-// import moment from "moment";
 import uuid from "react-uuid";
+import { useDispatch, useSelector } from "react-redux";
 import {
 	Edit,
 	DeleteOutline,
@@ -23,14 +23,13 @@ import {
 
 import Header from "../../components/Header/HeaderComponent";
 import classes from "./ListTodo.module.css";
-import {
-	retrieveAllTodos,
-	createTodo,
-	updateTodo,
-	deleteTodo
-} from "../../api/todo/ToDoDataService";
+import { retrieveAllTodos } from "../../api/todo/ToDoDataService";
+import { addTodo, deleteTodo, editTodo } from "../../state/actions";
 
 export default function MaterialTableDemo() {
+	const dispatch = useDispatch();
+	const { email } = useSelector(({ auth }) => auth);
+	// const { todos = [] } = useSelector(({ todo }) => ({ todos: todo.result }));
 	const [state, setState] = React.useState({
 		columns: [
 			{
@@ -60,7 +59,7 @@ export default function MaterialTableDemo() {
 	});
 
 	useEffect(() => {
-		loadTodos("sanjay@altimetrik.com");
+		loadTodos(email);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
@@ -76,16 +75,16 @@ export default function MaterialTableDemo() {
 			.catch(er => console.log(er));
 	}
 
-	function addTodo(data) {
-		createTodo("sanjay@altimetrik.com", data);
+	function createTodo(data) {
+		dispatch(addTodo(email, data));
 	}
 
-	function editTodo(todoId, data) {
-		updateTodo("sanjay@altimetrik.com", todoId, data);
+	function updateTodo(todoId, data) {
+		dispatch(editTodo(email, todoId, data));
 	}
 
 	function eraseTodo(todoId) {
-		deleteTodo("sanjay@altimetrik.com", todoId);
+		dispatch(deleteTodo(email, todoId));
 	}
 
 	return (
@@ -110,7 +109,7 @@ export default function MaterialTableDemo() {
 						ViewColumn: () => <ViewColumn />,
 						ThirdStateCheck: () => <Remove />,
 						Filter: () => <FilterList />,
-						SortArrow: React.forwardRef((props, ref) => (
+						SortArrow: forwardRef((props, ref) => (
 							<ArrowUpward {...props} ref={ref} />
 						)),
 						Check: () => <Check />
@@ -142,7 +141,7 @@ export default function MaterialTableDemo() {
 											? newData.completed
 											: false;
 										data.push(newData);
-										addTodo(newData);
+										createTodo(newData);
 										return { ...prevState, data };
 									});
 								}, 600);
@@ -156,7 +155,7 @@ export default function MaterialTableDemo() {
 											const data = [...prevState.data];
 											data[data.indexOf(oldData)] = newData;
 											console.log(newData);
-											editTodo(newData["todoId"], newData);
+											updateTodo(newData["todoId"], newData);
 											return { ...prevState, data };
 										});
 									}

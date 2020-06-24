@@ -5,14 +5,13 @@ import {
 	Toolbar,
 	AppBar,
 	Link,
-	IconButton,
 	makeStyles
 } from "@material-ui/core";
 import {} from "@material-ui/core/styles";
+import { useDispatch } from "react-redux";
 import { Link as LinkRo, withRouter } from "react-router-dom";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-
-import { logoutUser } from "../AuthenticatedRoute/AuthenticationService";
+import { logOut } from "../../state/actions";
 
 const useStyles = makeStyles(theme => ({
 	grow: {
@@ -37,11 +36,15 @@ const useStyles = makeStyles(theme => ({
 
 function HeaderComponent(props) {
 	const classes = useStyles();
-
+	const dispatch = useDispatch();
 	const [selectedTab, setSelectedTab] = useState(props.tab);
 
 	const handleClick = tabName => {
 		setSelectedTab(tabName);
+	};
+
+	const handleLogout = () => {
+		dispatch(logOut());
 	};
 
 	return (
@@ -72,6 +75,7 @@ function HeaderComponent(props) {
 					component={LinkRo}
 					className={classes.navigationLink}
 					color="inherit"
+					onClick={handleLogout}
 				>
 					<ExitToAppIcon fontSize="large" />
 				</Link>

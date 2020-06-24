@@ -8,13 +8,14 @@ import {
 } from "@material-ui/core/styles";
 import { CssBaseline } from "@material-ui/core";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
 import ToDoApp from "../src/pages/ToDoApp/ToDoApp";
-import LoginComponent from "../src/components/Login/LoginComponent";
+import LoginRegister from "../src/pages/LoginRegister/LoginRegister";
 import AuthenticatedRoute from "../src/components/AuthenticatedRoute/AuthenticatedRoute";
 import LogoutComponent from "../src/components/Logout/LogoutComponent";
-import Footer from "../src/components/Footer/FooterComponent";
+import LoadingIndicator from "../src/components/Loader/Loader";
+import SnackBarMessage from "../src/components/SnackBarMessage/SnackBarMessage";
 import Sample from "../src/pages/sample";
+import CopyRights from "../src/components/CopyRight/CopyRight";
 
 const theme = createMuiTheme({
 	palette: {
@@ -22,10 +23,6 @@ const theme = createMuiTheme({
 			main: "#61D0D4",
 			dark: "#a13e0e",
 			light: "#eb7b43"
-		},
-		success: {
-			main: "#61D0D4",
-			light: "#61D0D4"
 		},
 		background: { default: "#f9fafb" }
 	},
@@ -45,7 +42,7 @@ function App() {
 							<Switch>
 								<Route exact path="/sample" component={Sample} />
 								<Route exact path="/logout" component={LogoutComponent} />
-								<Route exact path="/login" component={LoginComponent} />
+								<Route exact path="/login" component={LoginRegister} />
 								<AuthenticatedRoute path="/" component={ToDoApp} />
 								<Route
 									path="*"
@@ -65,9 +62,11 @@ function App() {
 									)}
 								/>
 							</Switch>
+							<SnackBarMessage />
+							<LoadingIndicator />
 						</Router>
 					</div>
-					<Footer />
+					<CopyRights />
 				</div>
 			</ThemeProvider>
 		</StylesProvider>

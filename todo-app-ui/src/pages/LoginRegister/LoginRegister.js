@@ -1,12 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
-import SignUp from "./SignUp/SignUp";
-import SignIn from "./SignIn/SignIn";
+import { makeStyles, Grid, Link, Container } from "@material-ui/core";
+import { Tabs, Tab, Box } from "@material-ui/core";
+import SignUp from "../SignUp/SignUp";
+import SignIn from "../SignIn/SignIn";
 
 function TabPanel(props) {
 	const { children, value, index, ...other } = props;
@@ -19,11 +16,7 @@ function TabPanel(props) {
 			aria-labelledby={`wrapped-tab-${index}`}
 			{...other}
 		>
-			{value === index && (
-				<Box p={3}>
-					<Typography>{children}</Typography>
-				</Box>
-			)}
+			{value === index && <Box p={3}>{children}</Box>}
 		</div>
 	);
 }
@@ -53,7 +46,7 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-export default function TabsWrappedLabel() {
+export default function LoginRegister() {
 	const classes = useStyles();
 	const [value, setValue] = React.useState("one");
 
@@ -68,14 +61,14 @@ export default function TabsWrappedLabel() {
 				onChange={handleChange}
 				aria-label="wrapped label tabs example"
 			>
-				<Tab value="one" label="SignUp" {...a11yProps("one")} />
-				<Tab value="two" label="SignIn" {...a11yProps("two")} />
+				<Tab value="one" label="SignIn" {...a11yProps("one")} />
+				<Tab value="two" label="SignUp" {...a11yProps("two")} />
 			</Tabs>
 			<TabPanel value={value} index="one">
-				<SignUp />
+				<SignIn />
 			</TabPanel>
 			<TabPanel value={value} index="two">
-				<SignIn />
+				<SignUp />
 			</TabPanel>
 		</div>
 	);

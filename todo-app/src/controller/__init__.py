@@ -3,6 +3,7 @@
 from flask_restx import Api
 
 from .todos import NS as todos_ns
+from .users import NS as user_ns
 
 API = Api(
     version='0.1.0',
@@ -11,3 +12,4 @@ API = Api(
 )
 
 API.add_namespace(todos_ns)
+API.add_namespace(user_ns)
