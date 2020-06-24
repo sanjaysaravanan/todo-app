@@ -4,7 +4,6 @@ import { Route, Switch } from "react-router-dom";
 import ListToDo from "../../containers/ListTodo/ListToDo";
 import WelcomeComponent from "../../components/Welcome/WelcomeComponent";
 import ErrorComponent from "../../components/AuthenticatedRoute/ErrorComponent";
-import Footer from "../../components/Footer/FooterComponent";
 
 export default function() {
 	return (

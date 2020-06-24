@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { makeStyles, Grid, Link, Container } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 import { Tabs, Tab, Box } from "@material-ui/core";
 import SignUp from "../SignUp/SignUp";
 import SignIn from "../SignIn/SignIn";

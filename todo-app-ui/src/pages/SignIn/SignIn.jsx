@@ -2,7 +2,7 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { Link, Grid, Box, Container, makeStyles } from "@material-ui/core";
+import { Container, makeStyles } from "@material-ui/core";
 import ValidateTextField from "../../components/Form/ValidateTextField";
 import Message from "../../utils/Message";
 import Regex from "../../utils/Regex";
@@ -35,9 +35,7 @@ export default function SignIn() {
 		const userData = Array.from(event.target.elements)
 			.filter(f => f.nodeName === "INPUT")
 			.reduce((ac, a) => ({ ...ac, [a.name]: a.value }), {});
-		console.log(userData);
 		if (event.target.checkValidity()) {
-			console.log(userData);
 			await dispatch(login(userData));
 		}
 	};

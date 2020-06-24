@@ -10,7 +10,7 @@ class DBUtil:
     Handles all database communications
     """
 
-    db_host = "localhost"
+    db_host = "mongo"
     db_user = "root"
     db_password = "password"
     db_port = 27017

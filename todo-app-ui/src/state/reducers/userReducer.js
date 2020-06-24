@@ -1,4 +1,4 @@
-import { USER_ADD_SUCCESS, USER_ERROR, LOADING } from "../actions/actionTypes";
+import { USER_ADD_SUCCESS, USER_ERROR } from "../actions/actionTypes";
 
 export default function userReducer(state = {}, action) {
 	switch (action.type) {
