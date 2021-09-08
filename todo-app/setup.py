@@ -18,5 +18,5 @@ setup(
     package_dir={'': 'src'},
     py_modules=[splitext(basename(path))[0] for path in glob("src/*.py")],
     include_package_data=True,
-    install_requires=["flask-restx==0.1.1", "pymongo==3.10.1"]
+    install_requires=["flask-restx==0.5.1", "pymongo==3.10.1"]
 )
